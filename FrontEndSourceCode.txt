@@ -1,0 +1,403 @@
+<h1>Welcome to Medicare</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="products">Admin</a>
+    <a class="navbar-brand" routerLink="add">Add Product</a>
+    <a class="navbar-brand" routerLink="cart">Cart</a>
+    <a class="navbar-brand" routerLink="userLogin">UserLogin</a>
+</nav>
+   <router-outlet></router-outlet>
+
+
+
+<h1>Welcome To Admin portal</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ProductID</th>
+            <th>medicineName</th>
+            <th>medicineDetails</th>
+            <th>uses</th>
+            <th>safetyInformation</th>
+            <th>operations</th>
+            <th>activate/deactivate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product.productId}}</td>
+            <td>{{product.medicineName}}</td>
+            <td>{{product.medicineDetails}}</td>
+            <td>{{product.uses}}</td>
+            <td>{{product.safetyInformation}}</td>
+            <td><a routerLink="/details/{{product.productId}}"><button class="btn btn-success">view</button></a>
+            &nbsp;
+            <button class="btn btn-danger" (click)="onDelete(product.productId)">Delete</button>
+            </td>
+            <td>            <button>activate/deactivate</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+<form>
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" id="form2Example1" class="form-control" />
+      <label class="form-label" for="form2Example1">Email address</label>
+    </div>
+  
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="form2Example2" class="form-control" />
+      <label class="form-label" for="form2Example2">Password</label>
+    </div>
+  
+    <!-- 2 column grid layout for inline styling -->
+    <div class="row mb-4">
+      <div class="col d-flex justify-content-center">
+        <!-- Checkbox -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+          <label class="form-check-label" for="form2Example31"> Remember me </label>
+        </div>
+      </div>
+  
+      <div class="col">
+        <!-- Simple link -->
+        <a href="#!">Forgot password?</a>
+      </div>
+    </div>
+  
+    <!-- Submit button -->
+    <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+  
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>Not a member? <a href="#!">Register</a></p>
+      <p>or sign up with:</p>
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+  
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-google"></i>
+      </button>
+  
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+  
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-github"></i>
+      </button>
+    </div>
+  </form>
+
+
+
+<h1>medicine id {{product.productId}}</h1>
+<p>following are the details</p>
+<table class="table table-striped">
+   <tbody>
+    <tr>
+        <th>ID</th>
+        <td>{{product.productId}}</td>
+    </tr>
+    <tr>
+        <th>medicineName</th>
+        <td>{{product.medicineName}}</td>
+    </tr>
+    <tr>
+        <th>medicineDetails</th>
+        <td>{{product.medicineDetails}}</td>
+    </tr>
+    <tr>
+        <th>uses</th>
+        <td>{{product.uses}}</td>
+    </tr>
+    <tr>
+        <th>safetyInformations</th>
+        <td>{{product.safetyInformation}}</td>
+    </tr>
+   </tbody>
+</table>
+
+
+
+
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-8">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<div class="row">
+							<div class="col-xs-6">
+								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+							</div>
+							<div class="col-xs-6">
+								<button type="button" class="btn btn-primary btn-sm btn-block">
+									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+						</div>
+						<div class="col-xs-4">
+							<h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
+						</div>
+						<div class="col-xs-6">
+							<div class="col-xs-6 text-right">
+								<h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+							</div>
+							<div class="col-xs-4">
+								<input type="text" class="form-control input-sm" value="1">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-link btn-xs">
+									<span class="glyphicon glyphicon-trash"> </span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+						</div>
+						<div class="col-xs-4">
+							<h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
+						</div>
+						<div class="col-xs-6">
+							<div class="col-xs-6 text-right">
+								<h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+							</div>
+							<div class="col-xs-4">
+								<input type="text" class="form-control input-sm" value="1">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-link btn-xs">
+									<span class="glyphicon glyphicon-trash"> </span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="text-center">
+							<div class="col-xs-9">
+								<h6 class="text-right">Added items?</h6>
+							</div>
+							<div class="col-xs-3">
+								<button type="button" class="btn btn-default btn-sm btn-block">
+									Update cart
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class="row text-center">
+						<div class="col-xs-9">
+							<h4 class="text-right">Total <strong>$50.00</strong></h4>
+						</div>
+						<div class="col-xs-3">
+							<button type="button" class="btn btn-success btn-block">
+								Checkout
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="medicineName">medicineName</label>
+      <input type="text" class="form-control" id="medicineName" aria-describedby="medicineNamesHelp" placeholder="Enter medicineName" [(ngModel)]="product.medicineName" >
+    </div>
+    <div class="form-group">
+      <label for="medicineDetails">medicineDetails</label>
+      <input type="text" class="form-control" id="medicineDetails" placeholder="medicineDetails" [(ngModel)]="product.medicineDetails">
+    </div>
+    <div class="form-group">
+        <label for="uses">uses</label>
+        <input type="text" class="form-control" id="uses" placeholder="uses" [(ngModel)]="product.uses">
+      </div>
+      <div class="form-group">
+        <label for="safetyInformation">safetyInformation</label>
+        <input type="text" class="form-control" id="safetyInformation"  placeholder="safetyInformation" [(ngModel)]="product.safetyInformation">
+      </div>
+   
+    <button type="submit" class="btn btn-primary">Register</button>
+  
+  </form>
+
+
+
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AddProductComponent } from './add-product/add-product.component';
+import { CartComponent } from './cart/cart.component';
+import { DetailsComponent } from './details/details.component';
+import { ListComponent } from './list/list.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+
+const routes: Routes = [
+  {
+    path:"products",
+    component:ListComponent
+  },
+    
+      {
+        path:"add",
+        component:AddProductComponent
+      },
+   
+  
+  {
+    path:"details/:productId",
+    component:DetailsComponent
+  },
+  {
+    path:"cart",
+    component:CartComponent
+  },
+  {
+    path:"userLogin",
+    component:UserLoginComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from './models/Product';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductService {
+  baseUrl:string="http://localhost:8080/product/";
+
+  constructor(private http : HttpClient) { }
+  getAllProducts():Observable<Product[]>{
+   return this.http.get<Product[]>(this.baseUrl);
+  }
+  getProductById(productId:number):Observable<Product>{
+    return this.http.get<Product>(this.baseUrl+productId);
+  }
+  deleteuserById(productId:number){
+    return this.http.delete(this.baseUrl+productId);
+  }
+  addproduct(obj:Product){
+return this.http.post(this.baseUrl,obj);
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { Product } from '../models/Product';
+import { ProductService } from '../product.service';
+
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
+})
+export class ListComponent {
+
+  products:Product[];
+  constructor(private product:ProductService){}
+  ngOnInit(){
+    this.product.getAllProducts().subscribe(x=>this.products=x);
+  }
+  onDelete(productId:number){
+    this.product.deleteuserById(productId).subscribe(x=>console.log(x));
+   this.products=  this.products.filter(x=> x.productId!==productId);
+
+  }
+
+
+}
+
+
+import { Component } from '@angular/core';
+import { Product } from '../models/Product';
+import { ProductService } from '../product.service';
+
+@Component({
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
+})
+export class AddProductComponent {
+  constructor(private service:ProductService){}
+
+  product:Product=new Product();
+  onSubmit(){
+    this.service.addproduct(this.product).subscribe(x=>console.log(x))
+    alert("data submitted successfully");
+  }
+}
+
+export class Product{
+    productId:number;
+    medicineName:string;
+    medicineDetails:string;
+    uses:string;
+    safetyInformation:string;
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../models/Product';
+import { ProductService } from '../product.service';
+
+@Component({
+  selector: 'app-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.css']
+})
+export class DetailsComponent {
+  product:Product;
+  constructor(private service:ProductService,private route:ActivatedRoute){};
+  ngOnInit(){
+    const productId=this.route.snapshot.paramMap.get('productId');
+    this.service.getProductById(Number(productId)).subscribe(x=>this.product=x);
+  }
+
+}
+
+
+
+
+
