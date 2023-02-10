@@ -1,0 +1,309 @@
+package com.capstone.medicare.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.capstone.medicare.entity.Admin;
+import com.capstone.medicare.service.AdminServiceImpl;
+
+@RestController
+public class AdminController {
+
+	@Autowired
+	AdminServiceImpl impl;
+	
+	
+	@PostMapping("/admin")
+	public String addAdmin(@RequestBody Admin admin) {
+		impl.addAdmin(admin);
+		return "added successfully";
+		}
+	@PutMapping("/admin")
+	public String updateAdmin(@RequestBody Admin admin) {
+		impl.addAdmin(admin);
+		return "updated successfully";
+	}
+	
+	@GetMapping("/admin")
+	public List<Admin> getAllAdmin(){
+		return impl.getAll();
+	}
+
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+package com.capstone.medicare.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.capstone.medicare.entity.Product;
+import com.capstone.medicare.service.ProductServiceImpl;
+@CrossOrigin("http://localhost:4200/")
+@RestController
+@RequestMapping("/product")
+public class ProductController {
+	
+	@Autowired
+	ProductServiceImpl impl;
+	
+	@GetMapping("/")
+	public List<Product> getAllProducts(){
+		return impl.getAllProducts();
+	}
+	
+	@GetMapping("/{id}")
+	public Product getProductById(@PathVariable(value="id") int id) {
+		return impl.getProductById(id);
+	}
+	
+	@PostMapping("/")
+	public String addProduct(@RequestBody Product product) {
+		impl.addProduct(product);
+		return "added succsessfully ";
+	}
+	
+	@DeleteMapping("/{id}")
+	public String deleteById(@PathVariable(value="id") int id) {
+		impl.deleteProduct(id);
+		return "deleted Successfully";
+		
+	}
+
+}
+
+
+package com.capstone.medicare.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name="AdminData")
+public class Admin {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	int AdminId;
+	
+	String username;
+	
+	String password;
+
+	public int getAdminId() {
+		return AdminId;
+	}
+
+	public void setAdminId(int adminId) {
+		AdminId = adminId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [AdminId=" + AdminId + ", username=" + username + ", password=" + password + "]";
+	}
+	
+	
+	
+	
+
+	
+}
+
+
+package com.capstone.medicare.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CustomerData")
+public class Customer {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int customerId;
+	
+	String customerUsername;
+	
+	String customerPassword;
+	
+	
+
+}
+
+
+
+package com.capstone.medicare.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+
+
+@Entity
+@Table(name="productData")
+public class Product {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="productid")
+	int productId;
+	
+	String medicineName;
+	
+	String medicineDetails;
+	
+	String uses;
+	
+	String safetyInformation;
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	public String getMedicineName() {
+		return medicineName;
+	}
+
+	public void setMedicineName(String medicineName) {
+		this.medicineName = medicineName;
+	}
+
+	public String getMedicineDetails() {
+		return medicineDetails;
+	}
+
+	public void setMedicineDetails(String medicineDetails) {
+		this.medicineDetails = medicineDetails;
+	}
+
+	public String getUses() {
+		return uses;
+	}
+
+	public void setUses(String uses) {
+		this.uses = uses;
+	}
+
+	public String getSafetyInformation() {
+		return safetyInformation;
+	}
+
+	public void setSafetyInformation(String safetyInformation) {
+		this.safetyInformation = safetyInformation;
+	}
+
+	public Product() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", medicineName=" + medicineName + ", medicineDetails="
+				+ medicineDetails + ", uses=" + uses + ", safetyInformation=" + safetyInformation + "]";
+	}
+	
+	
+
+}
+
+
+
+package com.capstone.medicare.repository;
+
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.capstone.medicare.entity.Admin;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer>{
+	
+     
+	
+}
+
+
+package com.capstone.medicare.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.capstone.medicare.entity.Customer;
+
+public interface CustomerRepository extends JpaRepository<Customer, Integer>{
+	
+
+}
+
+
+
+package com.capstone.medicare.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.capstone.medicare.entity.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Integer>{
+	
+
+}
